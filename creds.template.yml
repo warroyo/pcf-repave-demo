@@ -1,0 +1,12 @@
+credentials:
+- name: /concourse/main/repave/opsman
+  type: json
+  value:
+    password: <secret>
+    username: <secret>
+    decryption_passphrase: <secret>
+    endpoint: <secret>
+
+- name: /concourse/main/repave/pivnet_token
+  type: password
+  value: <secret>

@@ -1,0 +1,37 @@
+= PCF Repave Demo
+
+== pre-reqs
+. concourse server
+. credhub intergation in concourse
+. access to pivnet from concourse
+. access to github from cocnourse
+
+== setup
+
+. clone this repo to your desktop
+
+. copy the `creds.template.yml` to `creds.yml`
+
+----
+cp creds.template.yml creds.yml
+----
+
+[start=3]
+
+. replace all of the `<secret>` placeholders with the values for your env
+
+. import the creds into credhub
+
+----
+credhub import -f creds.yml
+----
+
+[start=5]
+
+. create a new pipeline in cocnourse
+
+----
+fly -t <your-concourse> set-pipeline -p repave -c repave-pipeline.yml
+fly -t <your-concourse> up -p repave
+----
+

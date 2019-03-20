@@ -1,0 +1,3 @@
+properties-configuration:
+  director_configuration:
+    bosh_recreate_on_next_deploy: true
