@@ -15,7 +15,6 @@ resources:
     product_slug: platform-automation
     product_version: 2\.(.*)
     sort_by: semver
-    globs: ["platform-automation-tasks-*.zip"]
 
 
 - name: platform-automation-image
@@ -25,7 +24,6 @@ resources:
     product_slug: platform-automation
     product_version: 2\.(.*)
     sort_by: semver
-    globs: ["platform-automation-image-*.zip"]
 
 
 - name: configuration
@@ -63,9 +61,9 @@ jobs:
   plan:
   - aggregate:
     - get: platform-automation-image
-      params: {unpack: true}
+      params: {unpack: true, globs: [platform-automation-image-*.tgz]}
     - get: platform-automation-tasks
-      params: {unpack: true}
+      params: {unpack: true,globs: [platform-automation-tasks-*.zip]}
     - get: configuration
   - task: generate-opsman-env
     <<: *gen-opsman-env
@@ -84,11 +82,11 @@ jobs:
   plan:
   - aggregate:
     - get: platform-automation-image
+      params: {unpack: true, globs: [platform-automation-image-*.tgz]}
       passed: [configure-director]
-      # trigger: true
-      params: {unpack: true}
+      trigger: true
     - get: platform-automation-tasks
-      params: {unpack: true}
+      params: {unpack: true,globs: [platform-automation-tasks-*.zip]}
     - get: configuration
   - task: generate-opsman-env
     <<: *gen-opsman-env
@@ -96,6 +94,6 @@ jobs:
     image: platform-automation-image
     file: platform-automation-tasks/tasks/apply-changes.yml
     input_mapping:
-      env: interpolated-files
+      env: env
     params:
-      ENV_FILE: ((foundation))/vars/env/env.yml
+      ENV_FILE: env.yml

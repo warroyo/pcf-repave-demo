@@ -1,5 +1,8 @@
 = PCF Repave Demo
 
+this is a consolidated pipeline for simply doing a repave. configuration is normally externalized from the pipeline repo. this has been made to be as simple as possible.
+
+
 == pre-reqs
 . concourse server
 . credhub intergation in concourse
@@ -35,3 +38,6 @@ fly -t <your-concourse> set-pipeline -p repave -c repave-pipeline.yml
 fly -t <your-concourse> up -p repave
 ----
 
+[start=6]
+
+. kick off the first job in the pipeline. This will recreate all VMS in the environment.
