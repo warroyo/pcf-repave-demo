@@ -1,7 +1,9 @@
+:imagesdir:   images
 = PCF Repave Demo
 
 this is a consolidated pipeline for simply doing a repave. configuration is normally externalized from the pipeline repo. this has been made to be as simple as possible.
 
+image::pipeline.png[]
 
 == pre-reqs
 . concourse server
